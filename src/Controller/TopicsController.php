@@ -9,7 +9,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Topics;
 use App\Entity\User;
 
 /**
@@ -33,11 +32,12 @@ class TopicsController extends AbstractController
     public function new(Request $request): Response
     {
         $topic = new Topics();
-        $user = new User;
         $form = $this->createForm(TopicsType::class, $topic);
+        //$user = $this->get('security.token_storage')->getToken()->getUser();
 
-        $topic->setDateDeCreation();
-        $user->setEmail();
+        $topic->setDateDeCreation(new \DateTime())
+              ->setAuteur();
+        
 
         $form->handleRequest($request);
 
