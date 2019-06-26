@@ -149,8 +149,8 @@ class TopicsFixtures extends Fixture implements DependentFixtureInterface
 		$topics->setPicture('http://lorempixel.com/400/200/');
 		$topics->setDateDeCreation($faker->dateTime($max = 'now', $timezone = null));
 		$topics->setStatus('En Cours');
-		$topics->setVotePositif(99);
-		$topics->setVoteNegatif(1);
+		$topics->setVotePositif(1);
+		$topics->setVoteNegatif(99);
 		$topics->setBudget(1000000);
 		$topics->setReponse("NON");
 		$topics->setAuteur($this->getReference('user7'));
