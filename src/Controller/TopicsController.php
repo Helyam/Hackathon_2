@@ -34,9 +34,14 @@ class TopicsController extends AbstractController
         $topic = new Topics();
         $form = $this->createForm(TopicsType::class, $topic);
         $user = $this->get('security.token_storage')->getToken()->getUser();
-        dd($user);
+
         $topic->setDateDeCreation(new \DateTime())
-              ->setAuteur($user);
+              ->setAuteur($user)
+              ->setStatus('lancement du vote')
+              ->setVotePositif(0)
+              ->setVoteNegatif(0)
+              ->setBudget(0)
+              ->setReponse('En attente de la fin du vote');
 
 
         $form->handleRequest($request);
