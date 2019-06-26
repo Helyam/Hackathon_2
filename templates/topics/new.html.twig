@@ -1,11 +1,16 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}New Topics{% endblock %}
-
 {% block body %}
-    <h1>Create new Topics</h1>
-
-    {{ include('topics/_form.html.twig') }}
-
-    <a href="{{ path('topics_index') }}">back to list</a>
+<div class="container">
+    <div class="border bg-secondary rounded p-2 my-2">
+        <h2 class="text-light text-center">Create new Topics</h2>
+        <div>
+            <div class="card text-center m-2">
+                <div class="card-body p-1">
+                 <h5 class="card-title mb-1"></h5>{{ include('topics/_form.html.twig') }}
+                </div>
+            </div>
+        </div>
+    	<a href="{{ path('topics_index') }}" style="color: white;">back to list</a>
+    </div>
+</div>
 {% endblock %}

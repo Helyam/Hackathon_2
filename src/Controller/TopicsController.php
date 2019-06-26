@@ -71,27 +71,27 @@ class TopicsController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}/edit", name="topics_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, Topics $topic): Response
-    {
-        $form = $this->createForm(TopicsType::class, $topic);
-        $form->handleRequest($request);
+    // /**
+    //  * @Route("/{id}/edit", name="topics_edit", methods={"GET","POST"})
+    //  */
+    // public function edit(Request $request, Topics $topic): Response
+    // {
+    //     $form = $this->createForm(TopicsType::class, $topic);
+    //     $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('topics_index', [
-                'id' => $topic->getId(),
-            ]);
-        }
+    //         return $this->redirectToRoute('topics_index', [
+    //             'id' => $topic->getId(),
+    //         ]);
+    //     }
 
-        return $this->render('topics/edit.html.twig', [
-            'topic' => $topic,
-            'form' => $form->createView(),
-        ]);
-    }
+    //     return $this->render('topics/edit.html.twig', [
+    //         'topic' => $topic,
+    //         'form' => $form->createView(),
+    //     ]);
+    // }
 
     /**
      * @Route("/{id}", name="topics_delete", methods={"DELETE"})
