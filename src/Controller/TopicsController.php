@@ -33,11 +33,11 @@ class TopicsController extends AbstractController
     {
         $topic = new Topics();
         $form = $this->createForm(TopicsType::class, $topic);
-        //$user = $this->get('security.token_storage')->getToken()->getUser();
-
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        dd($user);
         $topic->setDateDeCreation(new \DateTime())
-              ->setAuteur();
-        
+              ->setAuteur($user);
+
 
         $form->handleRequest($request);
 
