@@ -34,13 +34,18 @@ class UserFixtures extends Fixture
 
 		for ($i=0; $i < 100 ; $i++) { 
 			$user = new User();
-			$user->setPoints(0);
+			$user->setPoints(rand(0, 1000));
 			$user->setEmail($faker->email);
 			$user->setPassword($this->encoder->encodePassword($user,'mdp'));
 			$user->setFirstname($faker->name);
 			$user->setLastname($faker->name);
 			$user->setZone('Lyon');
 			$user->setStatus('citoyen');
+
+			$this->addReference('vote' . $i, $user);
+
+			$this->addReference('user' . $i, $user);
+
 			$manager->persist($user);
 		}
 		$manager->flush();
