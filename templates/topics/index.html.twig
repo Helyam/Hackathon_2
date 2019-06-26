@@ -3,49 +3,56 @@
 {% block title %}Topics index{% endblock %}
 
 {% block body %}
-    <h1>Topics index</h1>
+<div class="container">
+    <div class="border bg-secondary rounded p-2 my-2">
+    <a style="color: white" href="{{ path('topics_new') }}">Create new</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Titre</th>
+                    <th>Content</th>
+                    <th>DateDeCreation</th>
+                    <th>Status</th>
+                    <th>VotePositif</th>
+                    <th>VoteNegatif</th>
+                </tr>
+            </thead>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Titre</th>
-                <th>Content</th>
-                <th>Picture</th>
-                <th>DateDeCreation</th>
-                <th>Status</th>
-                <th>VotePositif</th>
-                <th>VoteNegatif</th>
-                <th>Budget</th>
-                <th>Reponse</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+
         {% for topic in topics %}
-            <tr>
-                <td>{{ topic.id }}</td>
-                <td>{{ topic.titre }}</td>
-                <td>{{ topic.Content }}</td>
-                <td>{{ topic.picture }}</td>
-                <td>{{ topic.dateDeCreation ? topic.dateDeCreation|date('Y-m-d') : '' }}</td>
-                <td>{{ topic.status }}</td>
-                <td>{{ topic.votePositif }}</td>
-                <td>{{ topic.voteNegatif }}</td>
-                <td>{{ topic.budget }}</td>
-                <td>{{ topic.reponse }}</td>
-                <td>
-                    <a href="{{ path('topics_show', {'id': topic.id}) }}">show</a>
-                    <a href="{{ path('topics_edit', {'id': topic.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="11">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+             {% if loop.index %2 == 0 %}
+                    <tbody style=" background: #ffffff;">
+                        <tr>
+                            <td>{{ topic.titre }}</td>
+                            <td>{{ topic.Content |length > 50 ? topic.Content|slice(0,50) ~ '...' : topic.Content }}</td>
+                            <td>{{ topic.dateDeCreation ? topic.dateDeCreation|date('Y-m-d') : '' }}</td>
+                            <td>{{ topic.status }}</td>
+                            <td>{{ topic.votePositif }}</td>
+                            <td>{{ topic.voteNegatif }}</td>
+                            <td>
+                                <a style="color: black" href="{{ path('topics_show', {'id': topic.id}) }}">show</a>
+                            </td>
+                        </tr>
 
-    <a href="{{ path('topics_new') }}">Create new</a>
+                    </tbody>
+            {% else %}
+                    <tbody class="bg-light">
+                        <tr>
+                            <td>{{ topic.titre }}</td>
+                            <td>{{ topic.Content |length > 50 ? topic.Content|slice(0,50) ~ '...' : topic.Content }}</td>
+                            <td>{{ topic.dateDeCreation ? topic.dateDeCreation|date('Y-m-d') : '' }}</td>
+                            <td>{{ topic.status }}</td>
+                            <td>{{ topic.votePositif }}</td>
+                            <td>{{ topic.voteNegatif }}</td>
+                            <td>
+                                <a style="color: black" href="{{ path('topics_show', {'id': topic.id}) }}">show</a>
+                            </td>
+                        </tr>
+
+                    </tbody>
+        {% endif %}
+        {% endfor %}
+    </table>
+    </div>
+</div>
 {% endblock %}
