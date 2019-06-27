@@ -1,10 +1,14 @@
-{% extends 'base.html.twig' %}
+    {% extends 'base.html.twig' %}
 
 {% block title %}Topics{% endblock %}
 
 {% block body %}
 <div class="container">
-    <div class="border bg-secondary rounded p-2 my-2">
+    {% if topic.status == 'A Valider' %}
+        <div class="border bg-warning rounded p-2 my-2">
+    {% else %}
+        <div class="border bg-secondary rounded p-2 my-2">
+    {% endif %}
         <h2 class="text-light text-center">{{ topic.titre }}</h2>
         <div>
             <div class="card text-center m-2">
@@ -33,6 +37,15 @@
                     </div>
 
                 </div>
+                {% if app.user.status == "representant" %}
+                    <form action="{{ path('topics_edit', {'id' :topic.id}) }}" method="POST">
+                        <p>Budget :</p>
+                        <input type="number" name="budget">
+                        <p>Réponse :</p>
+                        <textarea name="response"></textarea>
+                        <input type="submit" name="go">
+                    </form>   
+                {% endif %}
             </div>
             <form method="POST" action="{{ path("topics_plus",{"id" :topic.id}) }}">
                 <button type="submit" class="mb-2 mr-md-4 offset-5" style="background-color: #FFFFFF; border-radius: 20px; border-width: thick;">
