@@ -1,10 +1,14 @@
-{% extends 'base.html.twig' %}
+    {% extends 'base.html.twig' %}
 
 {% block title %}Topics{% endblock %}
 
 {% block body %}
 <div class="container">
-    <div class="border bg-secondary rounded p-2 my-2">
+    {% if topic.status == 'A Valider' %}
+        <div class="border bg-warning rounded p-2 my-2">
+    {% else %}
+        <div class="border bg-secondary rounded p-2 my-2">
+    {% endif %}
         <h2 class="text-light text-center">{{ topic.titre }}</h2>
         <div>
             <div class="card text-center m-2">
@@ -22,9 +26,14 @@
                     <i class="fas fa-arrow-circle-up" style="color:green;"></i>{{ topic.votePositif }},
                     <i class="fas fa-arrow-circle-down" style="color:red;"></i>{{ topic.voteNegatif }},
                       ouvert le {{ topic.dateDeCreation ? topic.dateDeCreation|date('d/m/Y') : '' }}
-                    {% set pourcentPos = 100 * topic.votePositif / (topic.votePositif + topic.voteNegatif) %}
-                    {% set pourcentNeg = 100 * topic.voteNegatif / (topic.votePositif + topic.voteNegatif) %}
 
+                        {% if (topic.votePositif + topic.voteNegatif != 0)  %}
+                            {% set pourcentPos = 100 * topic.votePositif / (topic.votePositif + topic.voteNegatif) %}
+                            {% set pourcentNeg = 100 * topic.voteNegatif / (topic.votePositif + topic.voteNegatif) %}
+                        {% else %}
+                            {% set pourcentPos = 0 %}
+                            {% set pourcentNeg = 100 %}
+                        {% endif %}
 
                     <div class="progress">
 
@@ -33,6 +42,15 @@
                     </div>
 
                 </div>
+                {% if app.user.status == "representant" %}
+                    <form action="{{ path('topics_edit', {'id' :topic.id}) }}" method="POST">
+                        <p>Budget :</p>
+                        <input type="number" name="budget">
+                        <p>Réponse :</p>
+                        <textarea name="response"></textarea>
+                        <input type="submit" name="go">
+                    </form>   
+                {% endif %}
             </div>
             <form method="POST" action="{{ path("topics_plus",{"id" :topic.id}) }}">
                 <button type="submit" class="mb-2 mr-md-4 offset-5" style="background-color: #FFFFFF; border-radius: 20px; border-width: thick;">
@@ -61,8 +79,14 @@
     <p class="card-text p-2"><b>{{ topic.Content |length > 50 ? topic.Content|slice(0,50) ~ '...' : topic.Content }}</b></p>
     <p class ="p-2"><i>{{ topic.dateDeCreation ? topic.dateDeCreation|date('Y-m-d') : '' }}</i></p>
 
-    {% set pourcentPos = 100 * topic.votePositif / (topic.votePositif + topic.voteNegatif) %}
-    {% set pourcentNeg = 100 * topic.voteNegatif / (topic.votePositif + topic.voteNegatif) %}
+        {% if (topic.votePositif + topic.voteNegatif != 0)  %}
+            {% set pourcentPos = 100 * topic.votePositif / (topic.votePositif + topic.voteNegatif) %}
+            {% set pourcentNeg = 100 * topic.voteNegatif / (topic.votePositif + topic.voteNegatif) %}
+        {% else %}
+            {% set pourcentPos = 0 %}
+            {% set pourcentNeg = 100 %}
+        {% endif %}
+
     <div class="progress p-1">
         <div class="progress-bar bg-success" role="progressbar" style="width: {{ pourcentPos }}%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
         <div class="progress-bar bg-danger" role="progressbar" style="width: {{ pourcentNeg }}%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
