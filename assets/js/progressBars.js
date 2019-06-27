@@ -1,12 +1,29 @@
-var container = document.getElementById("body");
+let container = document.getElementById("barDiv");
 
-var barPos = document.createElement('DIV');
+let barPos = document.createElement('div');
 barPos.style.backgroundColor = "green";
-barPos.style.height = "60%";
+barPos.style.width = "60%";
 
-var barNeg = document.createElement('DIV');
+let barNeg = document.createElement('div');
 barNeg.style.backgroundColor = "red";
-barNeg.style.height = "40%";
+barNeg.style.width = "40%";
+
+
+let paragraphPos = document.createElement("span");
+let textPos = document.createTextNode("some text");
+paragraphPos.appendChild(textPos);
+
+
+let paragraphNeg = document.createElement("span");
+let textNeg = document.createTextNode("some text");
+paragraphNeg.appendChild(textNeg);
+
+
+
+
+barPos.appendChild(paragraphPos);
+barNeg.appendChild(paragraphNeg);
+
 
 container.appendChild(barPos);
 container.appendChild(barNeg);
