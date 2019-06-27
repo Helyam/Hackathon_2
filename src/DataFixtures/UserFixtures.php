@@ -32,6 +32,16 @@ class UserFixtures extends Fixture
 		$user->setStatus('representant');
 		$manager->persist($user);
 
+		$user = new User();
+		$user->setPoints(0);
+		$user->setEmail('mdp@mdp.mdp');
+		$user->setPassword($this->encoder->encodePassword($user,'mdp'));
+		$user->setFirstname('John');
+		$user->setLastname('Duff');
+		$user->setZone('Lyon');
+		$user->setStatus('citoyen');
+		$manager->persist($user);
+
 		for ($i=0; $i < 100 ; $i++) { 
 			$user = new User();
 			$user->setPoints(rand(0, 1000));
