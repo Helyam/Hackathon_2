@@ -2,11 +2,13 @@
 
 namespace App\Controller;
 
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Services\DataManager;
 use App\Repository\TopicsRepository;
 use App\Repository\VoteRepository;
-
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * @Route("/maire")
@@ -17,14 +19,25 @@ class MaireController extends AbstractController
     /**
      * @Route("/", name="maire_home")
      */
-    public function index(TopicsRepository $topicsRepository, VoteRepository $voteRepo)
-    {
+ public function index(TopicsRepository $topicsRepository, VoteRepository $voteRepo,DataManager $dm)
+
+    {       
+            $user = $this->get('security.token_storage')->getToken()->getUser();
+            if ($this->getUser() !== null) {
+              $rank = $dm->getRank($this->getUser()->getPoints());  
+            } else {
+                $rank = null;
+            }
+            
         return $this->render('home/accueil.html.twig', [
             'controller_name' => 'HomeController',
-            'topics' => $topicsRepository->findBy(['status' => 'Revu']),
+            'rank' => $rank,
+            'topics' => $topicsRepository->findBy(array('status' => 'Ouvert')),
             'votes' => $voteRepo->findAll(),
             'totalDecision' => $topicsRepository->findBy(['status' => ['Refusé', 'Réalisé']]),
         ]);
     }
 
+
+    
 }

@@ -23,7 +23,7 @@ class HomeController extends AbstractController
             } else {
                 $rank = null;
             }
-        
+            
         return $this->render('home/accueil.html.twig', [
             'controller_name' => 'HomeController',
             'rank' => $rank,
