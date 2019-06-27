@@ -27,7 +27,7 @@ class HomeController extends AbstractController
         return $this->render('home/accueil.html.twig', [
             'controller_name' => 'HomeController',
             'rank' => $rank,
-            'topics' => $topicsRepository->findBy(array('status' => 'Ouvert')),
+            'topics' => $topicsRepository->findALL(),
             'votes' => $voteRepo->findAll(),
             'totalDecision' => $topicsRepository->findBy(['status' => ['Refusé', 'Réalisé']]),
         ]);
