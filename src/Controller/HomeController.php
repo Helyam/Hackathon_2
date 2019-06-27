@@ -19,6 +19,7 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
             'topics' => $topicsRepository->findAll(),
             'votes' => $voteRepo->findAll(),
+            'totalDecision' => $topicsRepository->findBy(['status' => ['Refusé', 'Réalisé']]),
         ]);
     }
 }

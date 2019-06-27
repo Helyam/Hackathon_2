@@ -17,16 +17,15 @@
 <div class="bg-light">
 	<h3>Mes derniers avis</h3>
 	<ul>
+		{% for vote in votes %}
+			{% if app.user.id == vote.user.id %}
 		<li>
-			<a href="">pas de bac à verre  proche de  rue Delandine</a>
-			<i class="fas fa-arrow-circle-up" style="color:green;"></i> 254,
-			<i class="fas fa-arrow-circle-down" style="color:red;"></i>36
+			<a href="{{ path('topics_show', { 'id': vote.topic.id}) }}">{{ vote.topic.titre }}</a>
+			<i class="fas fa-arrow-circle-up" style="color:green;"></i>{{ vote.topic.votePositif }}
+			<i class="fas fa-arrow-circle-down" style="color:red;"></i>{{ vote.topic.voteNegatif }}
 		</li>
-		<li>
-			<a href="">un arret de bus blabla</a>
-			<i class="fas fa-arrow-circle-up" style="color:green;"></i> 254,
-			<i class="fas fa-arrow-circle-down" style="color:red;"></i>36
-		</li>
+			{% endif %}
+		{% endfor %}
 	</ul>
 </div>
 </div>
