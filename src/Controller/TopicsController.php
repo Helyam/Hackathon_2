@@ -5,11 +5,14 @@ namespace App\Controller;
 use App\Entity\Topics;
 use App\Form\TopicsType;
 use App\Repository\TopicsRepository;
+use App\Repository\VoteRepository;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\User;
+use App\Entity\Vote;
 
 /**
  * @Route("/topics")
@@ -64,10 +67,11 @@ class TopicsController extends AbstractController
     /**
      * @Route("/{id}", name="topics_show", methods={"GET"})
      */
-    public function show(Topics $topic): Response
+    public function show(Topics $topic, TopicsRepository $topicsRepository): Response
     {
         return $this->render('topics/show.html.twig', [
             'topic' => $topic,
+            'topics' => $topicsRepository->findAll(),
         ]);
     }
 
@@ -105,5 +109,43 @@ class TopicsController extends AbstractController
         }
 
         return $this->redirectToRoute('topics_index');
+    }
+     /**
+     * @Route("/vote/plus/{id}", name="topics_plus", methods={"POST"})
+     */
+    public function VotePositif(Request $request, Topics $topic, Objectmanager $manager, VoteRepository $voteRepo, TopicsRepository $topicsRepository)
+    {
+
+        $votes = $voteRepo->findBy(['topic' => $topic->getId(),
+                                    'user' => $this->getUser()->getId()
+                                        ]);
+        // si l'id du user connecté n'est pas présent dans la  base de donnée pour le topic concerné alors etc ...
+        if ($request->getMethod() == 'POST' && !$votes) {
+            $topic->setVotePositif($topic->getVotePositif() + 1);
+            $vote = new Vote();
+            $vote ->setUser($this->getUser())
+                  ->setTopic($topic)
+                  ->setIsPositif(true);
+            $manager->persist($vote);
+            $manager->flush();
+
+            return $this->redirectToRoute("topics_show", ['id' => $topic->getId()]);
+        }
+        return $this->render('topics/show.html.twig', [
+            'topic' => $topic,
+            'topics' => $topicsRepository->findAll(),
+        ]);
+    }
+     /**
+     * @Route("/vote/moins/{id}", name="topics_moins", methods={"POST"})
+     */
+    public function VoteNegatif(Topics $topic)
+    {
+        if (isSubmitted) {
+            $topic->getVotePositif();
+
+            return $this->redirectToRoute('topics_show');
+        }
+        return $this->render('topics/show.html.twig');
     }
 }
