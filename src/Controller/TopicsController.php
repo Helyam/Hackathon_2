@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\User;
+use Doctrine\Common\Persistence\ObjectManager;
+
 
 /**
  * @Route("/topics")
@@ -71,27 +73,32 @@ class TopicsController extends AbstractController
         ]);
     }
 
-    // /**
-    //  * @Route("/{id}/edit", name="topics_edit", methods={"GET","POST"})
-    //  */
-    // public function edit(Request $request, Topics $topic): Response
-    // {
-    //     $form = $this->createForm(TopicsType::class, $topic);
-    //     $form->handleRequest($request);
+      /**
+      * @Route("/{id}/edit", name="topics_edit", methods={"GET","POST"})
+      */
+     public function edit(Request $request, Topics $topic,ObjectManager $manager): Response
+     {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
 
-    //     if ($form->isSubmitted() && $form->isValid()) {
-    //         $this->getDoctrine()->getManager()->flush();
+         $form = $this->createForm(TopicsType::class, $topic);
+         $form->handleRequest($request);
 
-    //         return $this->redirectToRoute('topics_index', [
-    //             'id' => $topic->getId(),
-    //         ]);
-    //     }
+         if ($_SERVER['REQUEST_METHOD'] === 'POST' && $user->getStatus() == "representant") {
+            $topic->setBudget($_POST['budget']);
+            $topic->setReponse($_POST['response']);
+            $topic->setStatus('A Valider');
+            $manager->flush();
 
-    //     return $this->render('topics/edit.html.twig', [
-    //         'topic' => $topic,
-    //         'form' => $form->createView(),
-    //     ]);
-    // }
+             return $this->redirectToRoute('topics_index', [
+                 'id' => $topic->getId(),
+             ]);
+         }
+
+         return $this->render('topics/edit.html.twig', [
+             'topic' => $topic,
+             'form' => $form->createView(),
+         ]);
+     }
 
     /**
      * @Route("/{id}", name="topics_delete", methods={"DELETE"})
