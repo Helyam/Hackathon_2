@@ -1,32 +1,37 @@
-<div class="border bg-secondary rounded p-2 my-2">
-	<h4> Je suis <strong>ceinture noire citoyenne</strong>{{dump(pointPercentage)}}</h4>
-	<h4> Je peux créer un nouveau topic:<a href="#" class="btn btn-success">GO</a></h4>
+	<div class="border bg-secondary rounded p-2 my-2">
+		{% if rank != 0 %}
+		<h4> Je suis <strong>{{rank}} citoyen</strong></h4>
+		<h4> Je peux créer un nouveau topic:<a href="#" class="btn btn-success">GO</a></h4>
+		<div class="bg-light">
+			<h3>Mes créations</h3>
+			<ul>
+				{% for topic in topics %}
+					{% if app.user.id == topic.auteur.id %}
+						<li><a href="">{{ topic.titre }}</a>
+						<i class="fas fa-arrow-circle-up" style="color:green;"></i> {{ topic.votePositif }},
+						<i class="fas fa-arrow-circle-down" style="color:red;"></i> {{ topic.voteNegatif }}
+					{% endif %}
+				{% endfor %}
+			</li>
+		</ul>
+	</div>
 	<div class="bg-light">
-		<h3>Mes créations</h3>
+		<h3>Mes derniers avis</h3>
 		<ul>
-			{% for topic in topics %}
-			{% if app.user.id == topic.auteur.id %}
-			<li><a href="">{{ topic.titre }}</a>
-			<i class="fas fa-arrow-circle-up" style="color:green;"></i> {{ topic.votePositif }},
-			<i class="fas fa-arrow-circle-down" style="color:red;"></i> {{ topic.voteNegatif }}
-			{% endif %}
-			{% endfor %}
-		</li>
-	</ul>
+			<li>
+				<a href="">pas de bac à verre  proche de  rue Delandine</a>
+				<i class="fas fa-arrow-circle-up" style="color:green;"></i> 254,
+				<i class="fas fa-arrow-circle-down" style="color:red;"></i>36
+			</li>
+			<li>
+				<a href="">un arret de bus blabla</a>
+				<i class="fas fa-arrow-circle-up" style="color:green;"></i> 254,
+				<i class="fas fa-arrow-circle-down" style="color:red;"></i>36
+			</li>
+		</ul>
+	</div>
+{% else %}
+	<p> pas connecté, blabla pour créer un compte</p>
+{% endif %}
 </div>
-<div class="bg-light">
-	<h3>Mes derniers avis</h3>
-	<ul>
-		<li>
-			<a href="">pas de bac à verre  proche de  rue Delandine</a>
-			<i class="fas fa-arrow-circle-up" style="color:green;"></i> 254,
-			<i class="fas fa-arrow-circle-down" style="color:red;"></i>36
-		</li>
-		<li>
-			<a href="">un arret de bus blabla</a>
-			<i class="fas fa-arrow-circle-up" style="color:green;"></i> 254,
-			<i class="fas fa-arrow-circle-down" style="color:red;"></i>36
-		</li>
-	</ul>
-</div>
-</div>
+

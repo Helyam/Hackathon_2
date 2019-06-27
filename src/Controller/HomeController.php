@@ -18,10 +18,15 @@ class HomeController extends AbstractController
     public function index(TopicsRepository $topicsRepository, VoteRepository $voteRepo,DataManager $dm)
 
     {
-    		
+            if ($this->getUser() !== null) {
+    		  $rank = $dm->getRank($this->getUser()->getPoints());  
+            } else {
+                $rank = 0;
+            }
+        
         return $this->render('home/accueil.html.twig', [
             'controller_name' => 'HomeController',
-            'pointPercentage' => $dm->getRank(),
+            'rank' => $rank,
             'topics' => $topicsRepository->findAll(),
             'votes' => $voteRepo->findAll(),
         ]);
