@@ -27,8 +27,8 @@
                             <td>{{ topic.Content |length > 50 ? topic.Content|slice(0,50) ~ '...' : topic.Content }}</td>
                             <td>{{ topic.dateDeCreation ? topic.dateDeCreation|date('Y-m-d') : '' }}</td>
                             <td>{{ topic.status }}</td>
-                            <td>{{ topic.votePositif }}</td>
-                            <td>{{ topic.voteNegatif }}</td>
+                            <td><i class="fas fa-arrow-circle-up" style="color:green;"></i>{{ topic.votePositif }}</td>
+                            <td><i class="fas fa-arrow-circle-down" style="color:red;"></i>{{ topic.voteNegatif }}</td>
                             <td>
                                 <a style="color: black" href="{{ path('topics_show', {'id': topic.id}) }}">show</a>
                             </td>
@@ -42,8 +42,8 @@
                             <td>{{ topic.Content |length > 50 ? topic.Content|slice(0,50) ~ '...' : topic.Content }}</td>
                             <td>{{ topic.dateDeCreation ? topic.dateDeCreation|date('Y-m-d') : '' }}</td>
                             <td>{{ topic.status }}</td>
-                            <td>{{ topic.votePositif }}</td>
-                            <td>{{ topic.voteNegatif }}</td>
+                            <td><i class="fas fa-arrow-circle-up" style="color:green;"></i>{{ topic.votePositif }}</td>
+                            <td><i class="fas fa-arrow-circle-down" style="color:red;"></i>{{ topic.voteNegatif }}</td>
                             <td>
                                 <a style="color: black" href="{{ path('topics_show', {'id': topic.id}) }}">show</a>
                             </td>

@@ -1,38 +1,17 @@
 <div class="border bg-secondary rounded p-2 my-2">
-	<h2>Les topics qu'il faut consulter <a href="#" class="btn btn-primary">j'en veux plus</a> </h2>
+	<h2>Les topics qu'il faut consulter <a href="{{ path('topics_index') }}" class="btn btn-primary">j'en veux plus</a> </h2>
 	<div>
-		<div class="card text-center m-2">
+		{% for topic in topics %}
+		<a href="{{ path('topics_show', {'id': topic.id}) }}"><div class="card text-center m-2">
 			<div class="card-body p-1">
-				<h5 class="card-title mb-1">pas de bac à verre  proche de  rue Delandine
-				</h5>
+				<h5 class="card-title mb-1">{{ topic.titre }}</h5>
 			</div>
 			<div class="card-footer text-muted p-1">
-				<i class="fas fa-arrow-circle-up" style="color:green;"></i> 254,
-				<i class="fas fa-arrow-circle-down" style="color:red;"></i>36,
-				  ouvert le 19/06/19 à 17h35
+				<i class="fas fa-arrow-circle-up" style="color:green;"></i> {{ topic.votePositif }},
+				<i class="fas fa-arrow-circle-down" style="color:red;"></i>{{ topic.voteNegatif }},
+				  ouvert le {{ topic.dateDeCreation ? topic.dateDeCreation|date('d/m/Y h:i') : '' }}
 			</div>
-		</div>
-		<div class="card text-center m-2">
-			<div class="card-body p-1">
-				<h5 class="card-title mb-1">pas de bac à verre  proche de  rue Delandine
-				</h5>
-			</div>
-			<div class="card-footer text-muted p-1">
-				<i class="fas fa-arrow-circle-up" style="color:green;"></i> 254,
-				<i class="fas fa-arrow-circle-down" style="color:red;"></i>36,
-				  ouvert le 19/06/19 à 17h35
-			</div>
-		</div>
-		<div class="card text-center m-2">
-			<div class="card-body p-1">
-				<h5 class="card-title mb-1">pas de bac à verre  proche de  rue Delandine
-				</h5>
-			</div>
-			<div class="card-footer text-muted p-1">
-				<i class="fas fa-arrow-circle-up" style="color:green;"></i> 254,
-				<i class="fas fa-arrow-circle-down" style="color:red;"></i>36,
-				  ouvert le 19/06/19 à 17h35
-			</div>
-		</div>
+		</div></a>
+		{% endfor %}
 	</div>
 </div>
