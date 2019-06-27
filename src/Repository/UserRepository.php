@@ -19,22 +19,19 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
-    // /**
-    //  * @return User[] Returns an array of User objects
-    //  */
-    /*
-    public function findByExampleField($value)
+        public function countAvgMaxGlobalPoints()
     {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT AVG(u.points),MAX(u.points)
+            FROM App\Entity\User u'
+    );
+
+    // returns an array of Product objects
+    return $query->getResult();
     }
-    */
+  
 
     /*
     public function findOneBySomeField($value): ?User
