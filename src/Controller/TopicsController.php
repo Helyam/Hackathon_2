@@ -14,7 +14,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\User;
 use App\Entity\Vote;
 
-
 /**
  * @Route("/topics")
  */
