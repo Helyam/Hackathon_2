@@ -24,7 +24,7 @@ class UserRepository extends ServiceEntityRepository
         $entityManager = $this->getEntityManager();
 
         $query = $entityManager->createQuery(
-            'SELECT AVERAGE(u.points),MAX(u.points)
+            'SELECT AVG(u.points),MAX(u.points)
             FROM App\Entity\User u'
     );
 

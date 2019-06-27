@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Topics index{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="border bg-secondary rounded p-2 my-2">
+    <a style="color: white" href="{{ path('topics_new') }}">Create new</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Titre</th>
+                    <th>Content</th>
+                    <th>DateDeCreation</th>
+                    <th>Status</th>
+                    <th>VotePositif</th>
+                    <th>VoteNegatif</th>
+                </tr>
+            </thead>
+
+
+        {% for topic in topics %}
+             {% if loop.index %2 == 0 %}
+                    <tbody style=" background: #ffffff;">
+                        <tr>
+                            <td>{{ topic.titre }}</td>
+                            <td>{{ topic.Content |length > 50 ? topic.Content|slice(0,50) ~ '...' : topic.Content }}</td>
+                            <td>{{ topic.dateDeCreation ? topic.dateDeCreation|date('Y-m-d') : '' }}</td>
+                            <td>{{ topic.status }}</td>
+                            <td><i class="fas fa-arrow-circle-up" style="color:green;"></i>{{ topic.votePositif }}</td>
+                            <td><i class="fas fa-arrow-circle-down" style="color:red;"></i>{{ topic.voteNegatif }}</td>
+                            <td>
+                                <a style="color: black" href="{{ path('topics_show', {'id': topic.id}) }}">show</a>
+                            </td>
+                        </tr>
+
+                    </tbody>
+            {% else %}
+                    <tbody class="bg-light">
+                        <tr>
+                            <td>{{ topic.titre }}</td>
+                            <td>{{ topic.Content |length > 50 ? topic.Content|slice(0,50) ~ '...' : topic.Content }}</td>
+                            <td>{{ topic.dateDeCreation ? topic.dateDeCreation|date('Y-m-d') : '' }}</td>
+                            <td>{{ topic.status }}</td>
+                            <td><i class="fas fa-arrow-circle-up" style="color:green;"></i>{{ topic.votePositif }}</td>
+                            <td><i class="fas fa-arrow-circle-down" style="color:red;"></i>{{ topic.voteNegatif }}</td>
+                            <td>
+                                <a style="color: black" href="{{ path('topics_show', {'id': topic.id}) }}">show</a>
+                            </td>
+                        </tr>
+
+                    </tbody>
+        {% endif %}
+        {% endfor %}
+    </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Topics{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="border bg-secondary rounded p-2 my-2">
+        <h2 class="text-light text-center">{{ topic.titre }}</h2>
+        <div>
+            <div class="card text-center m-2">
+                <div class="card-body p-1">
+                    <img src="{{ topic.picture }}">
+                </div>
+                <div class="card-footer text-muted p-1">
+                    <h5 class="card-title mb-1">{{ topic.content }}</h5>
+                </div>
+
+                <div class="card-body p-1">
+                    <h5 class="card-title mb-1">Status: {{ topic.status }} | Budget: {{ topic.budget }} | Réponse: {{ topic.reponse }}</h5>
+                </div>
+                <div class="card-footer text-muted p-1">
+                    <i class="fas fa-arrow-circle-up" style="color:green;"></i>{{ topic.votePositif }},
+                    <i class="fas fa-arrow-circle-down" style="color:red;"></i>{{ topic.voteNegatif }},
+                      ouvert le {{ topic.dateDeCreation ? topic.dateDeCreation|date('d/m/Y') : '' }}
+                </div>
+            </div>
+        </div>
+    <a href="{{ path('topics_index') }}" style="color: white;">back to list</a>
+    </div>
+</div>
+
+
+{% endblock %}

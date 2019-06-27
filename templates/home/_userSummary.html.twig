@@ -4,9 +4,13 @@
 	<div class="bg-light">
 		<h3>Mes créations</h3>
 		<ul>
-			<li><a href="">arret de bus</a>
-			<i class="fas fa-arrow-circle-up" style="color:green;"></i> 254,
-			<i class="fas fa-arrow-circle-down" style="color:red;"></i>36
+			{% for topic in topics %}
+			{% if app.user.id == topic.auteur.id %}
+			<li><a href="">{{ topic.titre }}</a>
+			<i class="fas fa-arrow-circle-up" style="color:green;"></i> {{ topic.votePositif }},
+			<i class="fas fa-arrow-circle-down" style="color:red;"></i> {{ topic.voteNegatif }}
+			{% endif %}
+			{% endfor %}
 		</li>
 	</ul>
 </div>
