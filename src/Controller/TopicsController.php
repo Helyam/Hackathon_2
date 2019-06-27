@@ -12,12 +12,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\User;
-<<<<<<< HEAD
 use App\Entity\Vote;
-=======
-use Doctrine\Common\Persistence\ObjectManager;
 
->>>>>>> ff93f64cc4fe8ea685ffdda5d8383bfbec42b865
 
 /**
  * @Route("/topics")
