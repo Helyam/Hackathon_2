@@ -11,6 +11,14 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Topics
 {
+
+    const STATUS = [
+        'Ouvert',
+        'Revu',
+        'A Valider',
+        'Refusé',
+        'Réalisé'
+    ];
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -39,7 +47,7 @@ class Topics
     private $dateDeCreation;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\user", inversedBy="topics")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="topics")
      * @ORM\JoinColumn(nullable=false)
      */
     private $auteur;
