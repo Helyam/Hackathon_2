@@ -13,6 +13,9 @@ class TopicsFixtures extends Fixture implements DependentFixtureInterface
 {
 	public function load(ObjectManager $manager)
 	{
+
+		$status = ['Ouvert', 'Revu', 'A Valider', 'Refusé', 'Realisé' ];
+
 		$faker  =  Faker\Factory::create('fr_FR');
 
 		for ($i=20; $i <21 ; $i++) { 
@@ -21,7 +24,7 @@ class TopicsFixtures extends Fixture implements DependentFixtureInterface
 			$topics->SetContent($faker->text);
 			$topics->setPicture('http://lorempixel.com/400/200/');
 			$topics->setDateDeCreation($faker->dateTime($max = 'now', $timezone = null));
-			$topics->setStatus('En Cours');
+			$topics->setStatus('Ouvert');
 			$topics->setVotePositif(rand(0,100));
 			$topics->setVoteNegatif(rand(0,100));
 			$topics->setBudget(rand(0,100000));
@@ -40,7 +43,7 @@ class TopicsFixtures extends Fixture implements DependentFixtureInterface
 		$topics->SetContent($faker->text);
 		$topics->setPicture('http://lorempixel.com/400/200/');
 		$topics->setDateDeCreation($faker->dateTime);
-		$topics->setStatus('En Review');
+		$topics->setStatus('Revu');
 		$topics->setVotePositif(60);
 		$topics->setVoteNegatif(8);
 		$topics->setBudget(20000);
@@ -58,7 +61,7 @@ class TopicsFixtures extends Fixture implements DependentFixtureInterface
 		$topics->SetContent($faker->text);
 		$topics->setPicture('http://lorempixel.com/400/200/');
 		$topics->setDateDeCreation($faker->dateTime($max = 'now', $timezone = null));
-		$topics->setStatus('En Cours');
+		$topics->setStatus('Ouvert');
 		$topics->setVotePositif(67);
 		$topics->setVoteNegatif(2);
 		$topics->setBudget(34000);
@@ -94,7 +97,7 @@ class TopicsFixtures extends Fixture implements DependentFixtureInterface
 		$topics->SetContent($faker->text);
 		$topics->setPicture('http://lorempixel.com/400/200/');
 		$topics->setDateDeCreation($faker->dateTime($max = 'now', $timezone = null));
-		$topics->setStatus('En Cours');
+		$topics->setStatus('Ouvert');
 		$topics->setVotePositif(51);
 		$topics->setVoteNegatif(50);
 		$topics->setBudget(22000);
@@ -112,7 +115,7 @@ class TopicsFixtures extends Fixture implements DependentFixtureInterface
 		$topics->SetContent($faker->text);
 		$topics->setPicture('http://lorempixel.com/400/200/');
 		$topics->setDateDeCreation($faker->dateTime($max = 'now', $timezone = null));
-		$topics->setStatus('Accepter');
+		$topics->setStatus('Réalisé');
 		$topics->setVotePositif(90);
 		$topics->setVoteNegatif(10);
 		$topics->setBudget(0);
@@ -148,7 +151,7 @@ class TopicsFixtures extends Fixture implements DependentFixtureInterface
 		$topics->SetContent($faker->text);
 		$topics->setPicture('http://lorempixel.com/400/200/');
 		$topics->setDateDeCreation($faker->dateTime($max = 'now', $timezone = null));
-		$topics->setStatus('Refuser');
+		$topics->setStatus('Refusé');
 		$topics->setVotePositif(1);
 		$topics->setVoteNegatif(99);
 		$topics->setBudget(1000000);

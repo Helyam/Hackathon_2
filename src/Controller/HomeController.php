@@ -21,7 +21,7 @@ class HomeController extends AbstractController
             if ($this->getUser() !== null) {
     		  $rank = $dm->getRank($this->getUser()->getPoints());  
             } else {
-                $rank = 0;
+                $rank = null;
             }
         
         return $this->render('home/accueil.html.twig', [
@@ -29,6 +29,7 @@ class HomeController extends AbstractController
             'rank' => $rank,
             'topics' => $topicsRepository->findAll(),
             'votes' => $voteRepo->findAll(),
+            'totalDecision' => $topicsRepository->findBy(['status' => ['Refusé', 'Réalisé']]),
         ]);
     }
 }
