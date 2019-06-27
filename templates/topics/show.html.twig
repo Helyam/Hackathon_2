@@ -4,7 +4,11 @@
 
 {% block body %}
 <div class="container">
-    <div class="border bg-secondary rounded p-2 my-2">
+    {% if topic.status == 'A Valider' %}
+        <div class="border bg-warning rounded p-2 my-2">
+    {% else %}
+        <div class="border bg-secondary rounded p-2 my-2">
+    {% endif %}
         <h2 class="text-light text-center">{{ topic.titre }}</h2>
         <div>
             <div class="card text-center m-2">
@@ -31,6 +35,7 @@
                         <div class="progress-bar bg-success" role="progressbar" style="width: {{ pourcentPos }}%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
                         <div class="progress-bar bg-danger" role="progressbar" style="width: {{ pourcentNeg }}%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
+
                 </div>
                 {% if app.user.status == "representant" %}
                     <form action="{{ path('topics_edit', {'id' :topic.id}) }}" method="POST">
@@ -42,11 +47,45 @@
                     </form>   
                 {% endif %}
             </div>
+            <form method="POST" action="{{ path("topics_plus",{"id" :topic.id}) }}">
+                <button type="submit" class="mb-2 mr-md-4 offset-5" style="background-color: #FFFFFF; border-radius: 20px; border-width: thick;">
+                <h5 class="text-light mt-1 mx-1"><i class="fas fa-arrow-circle-up" style="color:green;"></i></h5></button>
+            </form>
+            <form method="POST" action="{{ path("topics_moins",{"id" :topic.id}) }}">
+                <button class="mb-2 mr-md-4 offset-1" style="background-color: #FFFFFF; border-radius: 20px; border-width: thick;">
+                <h5 class="text-light mt-1 mx-1"><i class="fas fa-arrow-circle-down" style="color:red;"></i></h5></button>
+            </form>
         </div>
-    <a href="{{ path('topics_index') }}" style="color: white;">back to list</a>
     </div>
+</div>
+<hr class="container">
+<div class="container    ">
+    <a style="color: white" href="{{ path('topics_new') }}">Create new</a>
+ 
+
+    <div class="row justify-content-around">
+        {% for topic in topics %}
+ <div class="card mb-5" style="width: 20rem;">
+  <img class="card-img-top" src="{{ topic.picture }}" alt="Card image cap">
+  <div class="card-body p-0">
+    <h5 class="card-title bg-dark text-light p-3" style="height: 7rem;">{{ topic.titre }}</h5>
+    <p class="card-text p-2"><b>{{ topic.Content |length > 50 ? topic.Content|slice(0,50) ~ '...' : topic.Content }}</b></p>
+    <p class ="p-2"><i>{{ topic.dateDeCreation ? topic.dateDeCreation|date('Y-m-d') : '' }}</i></p>
+
+    {% set pourcentPos = 100 * topic.votePositif / (topic.votePositif + topic.voteNegatif) %}
+    {% set pourcentNeg = 100 * topic.voteNegatif / (topic.votePositif + topic.voteNegatif) %}
+    <div class="progress p-1">
+        <div class="progress-bar bg-success" role="progressbar" style="width: {{ pourcentPos }}%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="progress-bar bg-danger" role="progressbar" style="width: {{ pourcentNeg }}%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+
+    <a href="{{ path('topics_show', {'id': topic.id}) }}" class="btn float-right" ><i class="fas fa-arrow-circle-right" style="font-size: 2em;"></i></a>
+  </div>
 </div>
 
 
+        {% endfor %}
+</div>
+</div>
 
 {% endblock %}
