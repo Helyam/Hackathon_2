@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+    {% extends 'base.html.twig' %}
 
 {% block title %}Topics{% endblock %}
 
@@ -32,6 +32,15 @@
                         <div class="progress-bar bg-danger" role="progressbar" style="width: {{ pourcentNeg }}%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
+                {% if app.user.status == "representant" %}
+                    <form action="{{ path('topics_edit', {'id' :topic.id}) }}" method="POST">
+                        <p>Budget :</p>
+                        <input type="number" name="budget">
+                        <p>Réponse :</p>
+                        <textarea name="response"></textarea>
+                        <input type="submit" name="go">
+                    </form>   
+                {% endif %}
             </div>
         </div>
     <a href="{{ path('topics_index') }}" style="color: white;">back to list</a>
