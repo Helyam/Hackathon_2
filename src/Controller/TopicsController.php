@@ -153,4 +153,27 @@ class TopicsController extends AbstractController
         }
         return $this->render('topics/show.html.twig');
     }
+
+    //  /**
+    //  * @Route("/{id}/like/{like})", name="topics_like", methods={"GET","POST"})
+    //  */
+    // public function topicLike(Request $request, Topic $topic, string $like)
+    // {
+    //     $entityManager = $this->getDoctrine()->getManager();
+    //     $userVote = $voteRepo->findOneBy(['topic' => $topic->getId(),
+    //                                 'user' => $this->getUser()->getId()
+    //                                     ]);
+    //     if ($userVote){
+    //         $entityManager = $this->getDoctrine()->getManager();
+    //         $entityManager->remove($userVote);
+    //     }
+    //         $newVote = new Vote();
+    //         $newVote ->setUser($this->getUser())
+    //               ->setTopic($topic);
+    //         $like == 'like'?$newVote->setIsPositif(true):$newVote->setIsPositif(false);
+    //         $entityManager->persist($newVote);
+    //         $entityManager->flush();
+    // }
+
+    
 }
