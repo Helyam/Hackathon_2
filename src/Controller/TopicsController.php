@@ -64,10 +64,11 @@ class TopicsController extends AbstractController
     /**
      * @Route("/{id}", name="topics_show", methods={"GET"})
      */
-    public function show(Topics $topic): Response
+    public function show(Topics $topic, TopicsRepository $topicsRepository): Response
     {
         return $this->render('topics/show.html.twig', [
             'topic' => $topic,
+            'topics' => $topicsRepository->findAll(),
         ]);
     }
 
