@@ -17,14 +17,5 @@
 			</a>
 			{% endif %}
 		{% endfor %}
-		{% for topic in topics %}
-			{% if app.user.id == topic.auteur.id %}
-				<li>
-					<a href="">{{ topic.titre }}</a>
-					<i class="fas fa-arrow-circle-up" style="color:green;"></i> {{ topic.votePositif }},
-					<i class="fas fa-arrow-circle-down" style="color:red;"></i> {{ topic.voteNegatif }}
-				</li>
-			{% endif %}
-		{% endfor %}
 	</div>
 </div>
