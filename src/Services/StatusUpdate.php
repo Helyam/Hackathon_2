@@ -11,7 +11,7 @@ Class StatusUpdate
                 
             $Pourcentage = $topic->getVotePositif() * 100 / ($topic->getVotePositif() + $topic->getVoteNegatif());
 
-            if($topic->getVotePositif() + $topic->getVoteNegatif() > 20)
+            if($topic->getVotePositif() + $topic->getVoteNegatif() > 2000)
             {
 
                 if($Pourcentage >= 60)
