@@ -61,11 +61,11 @@ class TopicsFixtures extends Fixture implements DependentFixtureInterface
 		$topics->SetContent($faker->text);
 		$topics->setPicture($faker->imageUrl());
 		$topics->setDateDeCreation($faker->dateTimeBetween('-15 days'));
-		$topics->setStatus('Ouvert');
+		$topics->setStatus('Revu');
 		$topics->setVotePositif(67);
 		$topics->setVoteNegatif(2);
-		$topics->setBudget(34000);
-		$topics->setReponse('Voici le devis');
+		$topics->setBudget(0);
+		$topics->setReponse('');
 		$topics->setAuteur($this->getReference('user2'));
 
 		$this->addReference('topic2', $topics);
@@ -80,10 +80,10 @@ class TopicsFixtures extends Fixture implements DependentFixtureInterface
 		$topics->setPicture($faker->imageUrl());
 		$topics->setDateDeCreation($faker->dateTimeBetween('-15 days'));
 		$topics->setStatus('A Valider');
-		$topics->setVotePositif(20);
-		$topics->setVoteNegatif(40);
+		$topics->setVotePositif(60);
+		$topics->setVoteNegatif(30);
 		$topics->setBudget(107000);
-		$topics->setReponse('Non favorable');
+		$topics->setReponse('favorable');
 		$topics->setAuteur($this->getReference('user3'));
 
 		$this->addReference('topic3', $topics);
@@ -97,11 +97,11 @@ class TopicsFixtures extends Fixture implements DependentFixtureInterface
 		$topics->SetContent($faker->text);
 		$topics->setPicture($faker->imageUrl());
 		$topics->setDateDeCreation($faker->dateTimeBetween('-15 days'));
-		$topics->setStatus('Ouvert');
+		$topics->setStatus('Revu');
 		$topics->setVotePositif(51);
 		$topics->setVoteNegatif(50);
-		$topics->setBudget(22000);
-		$topics->setReponse("c'est tendu");
+		$topics->setBudget(0);
+		$topics->setReponse("");
 		$topics->setAuteur($this->getReference('user4'));
 
 		$this->addReference('topic4', $topics);
@@ -137,7 +137,7 @@ class TopicsFixtures extends Fixture implements DependentFixtureInterface
 		$topics->setVotePositif(89);
 		$topics->setVoteNegatif(8);
 		$topics->setBudget(100000);
-		$topics->setReponse("Lyon c'est beau");
+		$topics->setReponse("C'est trés jolie");
 		$topics->setAuteur($this->getReference('user6'));
 
 		$this->addReference('topic6', $topics);
@@ -151,11 +151,11 @@ class TopicsFixtures extends Fixture implements DependentFixtureInterface
 		$topics->SetContent($faker->text);
 		$topics->setPicture($faker->imageUrl());
 		$topics->setDateDeCreation($faker->dateTimeBetween('-15 days'));
-		$topics->setStatus('Refusé');
+		$topics->setStatus('Revu');
 		$topics->setVotePositif(1);
 		$topics->setVoteNegatif(99);
-		$topics->setBudget(1000000);
-		$topics->setReponse("NON");
+		$topics->setBudget(0);
+		$topics->setReponse("");
 		$topics->setAuteur($this->getReference('user7'));
 
 		$this->addReference('topic7', $topics);
@@ -173,7 +173,7 @@ class TopicsFixtures extends Fixture implements DependentFixtureInterface
 		$topics->setVotePositif(18);
 		$topics->setVoteNegatif(70);
 		$topics->setBudget(10000);
-		$topics->setReponse("nn merci");
+		$topics->setReponse("pas mal");
 		$topics->setAuteur($this->getReference('user8'));
 
 		$this->addReference('topic8', $topics);
