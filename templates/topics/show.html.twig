@@ -41,6 +41,7 @@
                     </div>
 
                 </div>
+                {% if app.user.status is defined %}
                 {% if app.user.status == "representant" %}
                     <form action="{{ path('topics_edit', {'id' :topic.id}) }}" method="POST">
                         <p>Budget :</p>
@@ -49,6 +50,7 @@
                         <textarea name="response"></textarea>
                         <input type="submit" name="go">
                     </form>   
+                {% endif %}
                 {% endif %}
             </div>
 
