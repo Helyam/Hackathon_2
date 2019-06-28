@@ -3,20 +3,22 @@
 {% block title %}Hello{% endblock %}
 
 {% block body %}
-<div class="container">
+<div class="container-fluid">
+  <div class="container" >
         {{ include('home/_newsCarousel.html.twig') }}
-  <div class="row">
-    <div class="col-7 row mt-3 no-gutters px-1">
+  </div>
+  <div class="row justify-content-center mydiv">
+    <div class="col-5 row mt-3 no-gutters px-1">
       <div class="col-12">
         {{ include('home/_hotTopics.html.twig') }}
-        {{ include('home/_votedTopics.html.twig') }}
       </div>
       
     </div>
-    <div class="col-5 row mt-3 no-gutters px-1">
+    <div class="col-4 row mt-3 no-gutters px-1">
       <div class="col-12">
+        {{ include('home/_votedTopics.html.twig') }}
         {{ include('home/_townSummary.html.twig') }}
-        {{ include('home/_userSummary.html.twig') }}
+        <!-- {{ include('home/_userSummary.html.twig') }} -->
     </div>
     </div> 
   </div>

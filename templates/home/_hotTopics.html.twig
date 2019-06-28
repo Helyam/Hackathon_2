@@ -1,21 +1,29 @@
-<div class="border bg-secondary rounded p-2 my-2">
+<div class="border hottopics rounded p-2 my-2">
 	<div class="row">
-	<h2 class="text-light col-md-9">Les topics qu'il faut consulter</h2> 
+	<h2 class="text-light text-center col-md-9">Les topics qu'il faut consulter</h2> 
 	<a class="col-md-3" href="{{ path('topics_index') }}"><button  style="background-color: #FFFFFF; border-radius: 20px; border-width: thick;">j'en veux plus</button></a>
 	</div>
 	<div>
 		{% for topic in topics|slice(0, 5) %}
 		<a href="{{ path('topics_show', {'id': topic.id}) }}">
-			<div class="card text-center m-2">
-			<div class="card-body p-1">
-				<h5 class="card-title mb-1">{{ topic.titre }}</h5>
+		<div class="row p-2">	
+			<div class="col-6">
+				 <img src="{{ topic.picture }}" class="card-img-top" alt="...">
 			</div>
-			<div class="card-footer text-muted p-1">
-				<i class="fas fa-arrow-circle-up" style="color:green;"></i> {{ topic.votePositif }},
-				<i class="fas fa-arrow-circle-down" style="color:red;"></i>{{ topic.voteNegatif }},
-				  ouvert le {{ topic.dateDeCreation ? topic.dateDeCreation|date('d/m/Y h:i') : '' }}
+			<div class="col-6">
+				<div class="card text-center m-2">		
+					<div class="card-body p-1">
+						<h5 class="card-title mb-1">{{ topic.titre }}</h5>
+					</div>
+					<div class="card-footer text-muted p-1">
+						<i class="fas fa-arrow-circle-up" style="color:green;"></i> {{ topic.votePositif }},
+						<i class="fas fa-arrow-circle-down" style="color:red;"></i>{{ topic.voteNegatif }},
+						  ouvert le {{ topic.dateDeCreation ? topic.dateDeCreation|date('d/m/Y h:i') : '' }}
+					</div>
+				</div>
 			</div>
-		</div></a>
+		</div>	
+		</a><hr style="background-color:white">
 		{% endfor %}
 	</div>
 </div>

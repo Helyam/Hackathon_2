@@ -18,30 +18,30 @@ class TopicsFixtures extends Fixture implements DependentFixtureInterface
 
 		$faker  =  Faker\Factory::create('fr_FR');
 
-		for ($i=20; $i <21 ; $i++) { 
-			$topics = New Topics();
-			$topics->setTitre($faker->title);
-			$topics->SetContent($faker->text);
-			$topics->setPicture('http://lorempixel.com/400/200/');
-			$topics->setDateDeCreation($faker->dateTime($max = 'now', $timezone = null));
-			$topics->setStatus('Ouvert');
-			$topics->setVotePositif(rand(0,100));
-			$topics->setVoteNegatif(rand(0,100));
-			$topics->setBudget(rand(0,100000));
-			$topics->setReponse($faker->title);
-			$topics->setAuteur($this->getReference('user' . $i));
+		// for ($i=20; $i <21 ; $i++) { 
+		// 	$topics = New Topics();
+		// 	$topics->setTitre($faker->title);
+		// 	$topics->SetContent($faker->text);
+		// 	$topics->setPicture('http://lorempixel.com/400/200/');
+		// 	$topics->setDateDeCreation($faker->dateTime($max = 'now', $timezone = null));
+		// 	$topics->setStatus('Ouvert');
+		// 	$topics->setVotePositif(rand(0,100));
+		// 	$topics->setVoteNegatif(rand(0,100));
+		// 	$topics->setBudget(rand(0,100000));
+		// 	$topics->setReponse($faker->title);
+		// 	$topics->setAuteur($this->getReference('user' . $i));
 
-			$this->addReference('topic' . $i, $topics, $topics);
+		// 	$this->addReference('topic' . $i, $topics, $topics);
 
-			$manager->persist($topics);		
+		// 	$manager->persist($topics);		
 
-			$manager->flush();
-		}
+		// 	$manager->flush();
+		// }
 
 		$topics = New Topics();
 		$topics->setTitre('Piscine à lyon');
 		$topics->SetContent($faker->text);
-		$topics->setPicture('http://lorempixel.com/400/200/');
+		$topics->setPicture('https://lvdneng.rosselcdn.net/sites/default/files/dpistyles_v2/ena_16_9_extra_big/2019/04/23/node_572523/40263052/public/2019/04/23/B9719346487Z.1_20190423171605_000%2BGD0DEVE9P.3-0.jpg?itok=LT11GHmA');
 		$topics->setDateDeCreation($faker->dateTime);
 		$topics->setStatus('Revu');
 		$topics->setVotePositif(60);
@@ -59,7 +59,7 @@ class TopicsFixtures extends Fixture implements DependentFixtureInterface
 		$topics = New Topics();
 		$topics->setTitre("construction d'un nouvel arret de bus rue Bourget");
 		$topics->SetContent($faker->text);
-		$topics->setPicture('http://lorempixel.com/400/200/');
+		$topics->setPicture('http://www.slate.fr/sites/default/files/styles/1060x523/public/bus-mmmm-3018.jpg');
 		$topics->setDateDeCreation($faker->dateTime($max = 'now', $timezone = null));
 		$topics->setStatus('Ouvert');
 		$topics->setVotePositif(67);
@@ -77,7 +77,7 @@ class TopicsFixtures extends Fixture implements DependentFixtureInterface
 		$topics = New Topics();
 		$topics->setTitre("création d'un parking covoiturage place Bellemont");
 		$topics->SetContent($faker->text);
-		$topics->setPicture('http://lorempixel.com/400/200/');
+		$topics->setPicture('http://3.bp.blogspot.com/-GYZ9FdpYKI0/T3dy4jvEMEI/AAAAAAAAAU8/wVF7eAQgfYo/s1600/ejaz+2%28einfohub.blogspot.jpg');
 		$topics->setDateDeCreation($faker->dateTime($max = 'now', $timezone = null));
 		$topics->setStatus('A Valider');
 		$topics->setVotePositif(20);
@@ -95,7 +95,7 @@ class TopicsFixtures extends Fixture implements DependentFixtureInterface
 		$topics = New Topics();
 		$topics->setTitre("Allonger le temps de garderie, crèche des petits lutins ");
 		$topics->SetContent($faker->text);
-		$topics->setPicture('http://lorempixel.com/400/200/');
+		$topics->setPicture('https://image.jimcdn.com/app/cms/image/transf/dimension=origxorig:format=jpg/path/s7082815317e2e0ef/image/i83bc0846ded9d944/version/1425552207/image.jpg');
 		$topics->setDateDeCreation($faker->dateTime($max = 'now', $timezone = null));
 		$topics->setStatus('Ouvert');
 		$topics->setVotePositif(51);
@@ -113,7 +113,7 @@ class TopicsFixtures extends Fixture implements DependentFixtureInterface
 		$topics = New Topics();
 		$topics->setTitre("Interdiction des trotinettes electriques aux parc de la tete d'or");
 		$topics->SetContent($faker->text);
-		$topics->setPicture('http://lorempixel.com/400/200/');
+		$topics->setPicture('https://www.lyoncapitale.fr/wp-content/uploads/2014/10/501772-ez-parc-de-la-tete-d-or-640x433.jpg');
 		$topics->setDateDeCreation($faker->dateTime($max = 'now', $timezone = null));
 		$topics->setStatus('Réalisé');
 		$topics->setVotePositif(90);
@@ -131,7 +131,7 @@ class TopicsFixtures extends Fixture implements DependentFixtureInterface
 		$topics = New Topics();
 		$topics->setTitre("Festival des lumières");
 		$topics->SetContent($faker->text);
-		$topics->setPicture('http://lorempixel.com/400/200/');
+		$topics->setPicture('https://image.jimcdn.com/app/cms/image/transf/dimension=origxorig:format=jpg/path/s7082815317e2e0ef/image/i83bc0846ded9d944/version/1425552207/image.jpg');
 		$topics->setDateDeCreation($faker->dateTime($max = 'now', $timezone = null));
 		$topics->setStatus('A Valider');
 		$topics->setVotePositif(89);
@@ -149,7 +149,7 @@ class TopicsFixtures extends Fixture implements DependentFixtureInterface
 		$topics = New Topics();
 		$topics->setTitre("Ligne de métro Lyon - st Etienne");
 		$topics->SetContent($faker->text);
-		$topics->setPicture('http://lorempixel.com/400/200/');
+		$topics->setPicture('https://www.mediapronos.com/wp-content/uploads/2019/01/pronosticlyonstetienne.jpg');
 		$topics->setDateDeCreation($faker->dateTime($max = 'now', $timezone = null));
 		$topics->setStatus('Refusé');
 		$topics->setVotePositif(1);
@@ -167,7 +167,7 @@ class TopicsFixtures extends Fixture implements DependentFixtureInterface
 		$topics = New Topics();
 		$topics->setTitre("Projection de la coupe du monde de foot féminine");
 		$topics->SetContent($faker->text);
-		$topics->setPicture('http://lorempixel.com/400/200/');
+		$topics->setPicture('https://www.mediapronos.com/wp-content/uploads/2019/01/pronosticlyonstetienne.jpg');
 		$topics->setDateDeCreation($faker->dateTime($max = 'now', $timezone = null));
 		$topics->setStatus('a Valider');
 		$topics->setVotePositif(18);

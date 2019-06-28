@@ -1,3 +1,11 @@
 body {
-    background-color: lightgray;
+    background-color: #B2B2B2;
+}
+
+.mydiv{
+	background-color: white;
+}
+
+.hottopics {
+	background-color: rgb(230, 73, 94, 0.5);
 }
