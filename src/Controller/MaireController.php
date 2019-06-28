@@ -22,7 +22,9 @@ class MaireController extends AbstractController
  public function index(TopicsRepository $topicsRepository, VoteRepository $voteRepo,DataManager $dm)
 
     {       
+            
             $user = $this->get('security.token_storage')->getToken()->getUser();
+            
             if ($this->getUser() !== null) {
               $rank = $dm->getRank($this->getUser()->getPoints());  
             } else {

@@ -14,21 +14,21 @@ class TopicsFixtures extends Fixture implements DependentFixtureInterface
 	public function load(ObjectManager $manager)
 	{
 
-		$status = ['Ouvert', 'Revu', 'A Valider', 'Refusé', 'Realisé' ];
+		$status = ['Ouvert', 'A Valider', 'Refusé', 'Realisé' ];
 
 		$faker  =  Faker\Factory::create('fr_FR');
 
-		for ($i=20; $i <21 ; $i++) { 
+		for ($i=21; $i <21 ; $i++) { 
 			$topics = New Topics();
-			$topics->setTitre($faker->title);
+			$topics->setTitre($faker->sentence());
 			$topics->SetContent($faker->text);
-			$topics->setPicture('http://lorempixel.com/400/200/');
-			$topics->setDateDeCreation($faker->dateTime($max = 'now', $timezone = null));
+			$topics->setPicture($faker->imageUrl());
+			$topics->setDateDeCreation($faker->dateTimeBetween('-15 days'));
 			$topics->setStatus('Ouvert');
-			$topics->setVotePositif(rand(0,100));
-			$topics->setVoteNegatif(rand(0,100));
-			$topics->setBudget(rand(0,100000));
-			$topics->setReponse($faker->title);
+			$topics->setVotePositif(rand(1000,10000));
+			$topics->setVoteNegatif(rand(1000,10000));
+			$topics->setBudget(0);
+			$topics->setReponse('');
 			$topics->setAuteur($this->getReference('user' . $i));
 
 			$this->addReference('topic' . $i, $topics, $topics);
@@ -41,13 +41,13 @@ class TopicsFixtures extends Fixture implements DependentFixtureInterface
 		$topics = New Topics();
 		$topics->setTitre('Piscine à lyon');
 		$topics->SetContent($faker->text);
-		$topics->setPicture('http://lorempixel.com/400/200/');
-		$topics->setDateDeCreation($faker->dateTime);
+		$topics->setPicture($faker->imageUrl());
+		$topics->setDateDeCreation($faker->dateTimeBetween('-15 days'));
 		$topics->setStatus('Revu');
 		$topics->setVotePositif(60);
 		$topics->setVoteNegatif(8);
-		$topics->setBudget(20000);
-		$topics->setReponse('Demande accepté');
+		$topics->setBudget(0);
+		$topics->setReponse('');
 		$topics->setAuteur($this->getReference('user1'));
 
 		$this->addReference('topic1', $topics);
@@ -59,8 +59,8 @@ class TopicsFixtures extends Fixture implements DependentFixtureInterface
 		$topics = New Topics();
 		$topics->setTitre("construction d'un nouvel arret de bus rue Bourget");
 		$topics->SetContent($faker->text);
-		$topics->setPicture('http://lorempixel.com/400/200/');
-		$topics->setDateDeCreation($faker->dateTime($max = 'now', $timezone = null));
+		$topics->setPicture($faker->imageUrl());
+		$topics->setDateDeCreation($faker->dateTimeBetween('-15 days'));
 		$topics->setStatus('Ouvert');
 		$topics->setVotePositif(67);
 		$topics->setVoteNegatif(2);
@@ -77,8 +77,8 @@ class TopicsFixtures extends Fixture implements DependentFixtureInterface
 		$topics = New Topics();
 		$topics->setTitre("création d'un parking covoiturage place Bellemont");
 		$topics->SetContent($faker->text);
-		$topics->setPicture('http://lorempixel.com/400/200/');
-		$topics->setDateDeCreation($faker->dateTime($max = 'now', $timezone = null));
+		$topics->setPicture($faker->imageUrl());
+		$topics->setDateDeCreation($faker->dateTimeBetween('-15 days'));
 		$topics->setStatus('A Valider');
 		$topics->setVotePositif(20);
 		$topics->setVoteNegatif(40);
@@ -95,8 +95,8 @@ class TopicsFixtures extends Fixture implements DependentFixtureInterface
 		$topics = New Topics();
 		$topics->setTitre("Allonger le temps de garderie, crèche des petits lutins ");
 		$topics->SetContent($faker->text);
-		$topics->setPicture('http://lorempixel.com/400/200/');
-		$topics->setDateDeCreation($faker->dateTime($max = 'now', $timezone = null));
+		$topics->setPicture($faker->imageUrl());
+		$topics->setDateDeCreation($faker->dateTimeBetween('-15 days'));
 		$topics->setStatus('Ouvert');
 		$topics->setVotePositif(51);
 		$topics->setVoteNegatif(50);
@@ -113,8 +113,8 @@ class TopicsFixtures extends Fixture implements DependentFixtureInterface
 		$topics = New Topics();
 		$topics->setTitre("Interdiction des trotinettes electriques aux parc de la tete d'or");
 		$topics->SetContent($faker->text);
-		$topics->setPicture('http://lorempixel.com/400/200/');
-		$topics->setDateDeCreation($faker->dateTime($max = 'now', $timezone = null));
+		$topics->setPicture($faker->imageUrl());
+		$topics->setDateDeCreation($faker->dateTimeBetween('-15 days'));
 		$topics->setStatus('Réalisé');
 		$topics->setVotePositif(90);
 		$topics->setVoteNegatif(10);
@@ -131,8 +131,8 @@ class TopicsFixtures extends Fixture implements DependentFixtureInterface
 		$topics = New Topics();
 		$topics->setTitre("Festival des lumières");
 		$topics->SetContent($faker->text);
-		$topics->setPicture('http://lorempixel.com/400/200/');
-		$topics->setDateDeCreation($faker->dateTime($max = 'now', $timezone = null));
+		$topics->setPicture($faker->imageUrl());
+		$topics->setDateDeCreation($faker->dateTimeBetween('-15 days'));
 		$topics->setStatus('A Valider');
 		$topics->setVotePositif(89);
 		$topics->setVoteNegatif(8);
@@ -149,8 +149,8 @@ class TopicsFixtures extends Fixture implements DependentFixtureInterface
 		$topics = New Topics();
 		$topics->setTitre("Ligne de métro Lyon - st Etienne");
 		$topics->SetContent($faker->text);
-		$topics->setPicture('http://lorempixel.com/400/200/');
-		$topics->setDateDeCreation($faker->dateTime($max = 'now', $timezone = null));
+		$topics->setPicture($faker->imageUrl());
+		$topics->setDateDeCreation($faker->dateTimeBetween('-15 days'));
 		$topics->setStatus('Refusé');
 		$topics->setVotePositif(1);
 		$topics->setVoteNegatif(99);
@@ -167,8 +167,8 @@ class TopicsFixtures extends Fixture implements DependentFixtureInterface
 		$topics = New Topics();
 		$topics->setTitre("Projection de la coupe du monde de foot féminine");
 		$topics->SetContent($faker->text);
-		$topics->setPicture('http://lorempixel.com/400/200/');
-		$topics->setDateDeCreation($faker->dateTime($max = 'now', $timezone = null));
+		$topics->setPicture($faker->imageUrl());
+		$topics->setDateDeCreation($faker->dateTimeBetween('-15 days'));
 		$topics->setStatus('a Valider');
 		$topics->setVotePositif(18);
 		$topics->setVoteNegatif(70);
