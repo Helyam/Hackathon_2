@@ -1,20 +1,11 @@
 <div class="container">
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<a class="navbar-brand" href="#">Navbar</a>
+	<nav class="navbar navbar-expand-lg navbar-transparent">
+	<a class="navbar-brand text-dark" href="{{ path('home') }}"><i class="fab fa-cuttlefish"></i> <strong>ma ville</strong> <i class="fas fa-exclamation"></i></a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
-
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
-					<a class="nav-link" href="{{ path('home') }}">Home <span class="sr-only">(current)</span></a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="{{ path('topics_index') }}">Topics</a>
-				</li>
-			</ul>
-			<div class="my-2 my-lg-0">
+			<div class="my-2 my-lg-0 offset-9">
 				{% if app.user %}
     				<a href="{{ path('app_logout') }}">
 					<button class="mb-2 mr-md-4" style="background-color: #FFFFFF; border-radius: 20px; border-width: thick;">Se déconnecter</button></a>

@@ -1,16 +1,17 @@
 <div class="border bg-secondary rounded p-2 my-2 text-light">
 	{% if rank != null %}
-		<h4> Je suis <strong>{{rank}} citoyen</strong></h4>
-		<h4> Je peux créer un nouveau topic:<a href="{{ path('topics_new') }}" class="btn btn-success">GO</a></h4>
+		<h4>Je suis <strong>{{rank}} citoyen</strong>
+		<h4>Créer un nouveau topic:<a href="{{ path('topics_new') }}">
+		<button class="mb-2 mr-md-4" style="background-color: #FFFFFF; border-radius: 20px; border-width: thick;">GO</button></a></h4>
 		<div class="bg-light">
 			<h3 class="text-dark">Mes créations</h3>
 			<ul>
 				{% for topic in topics %}
 					{% if app.user.id == topic.auteur.id %}
 						<li>
-							<a href="">{{ topic.titre }}</a>
-							<i class="fas fa-arrow-circle-up" style="color:green;"></i> {{ topic.votePositif }},
-							<i class="fas fa-arrow-circle-down" style="color:red;"></i> {{ topic.voteNegatif }}
+							<p class="text-dark"><a href="">{{ topic.titre }}</a>
+							<i class="fas fa-arrow-circle-up" style="color:green;"></i> {{ topic.votePositif }}
+							<i class="fas fa-arrow-circle-down" style="color:red;"></i> {{ topic.voteNegatif }}</p>
 						</li>
 					{% endif %}
 				{% endfor %}
@@ -22,9 +23,10 @@
 				{% for vote in votes %}
 					{% if app.user.id == vote.user.id %}
 						<li>
+							<p class="text-dark">
 							<a href="{{ path('topics_show', { 'id': vote.topic.id}) }}">{{ vote.topic.titre }}</a>
 							<i class="fas fa-arrow-circle-up" style="color:green;"></i>{{ vote.topic.votePositif }}
-							<i class="fas fa-arrow-circle-down" style="color:red;"></i>{{ vote.topic.voteNegatif }}
+							<i class="fas fa-arrow-circle-down" style="color:red;"></i>{{ vote.topic.voteNegatif }}</p>
 						</li>
 					{% endif %}
 				{% endfor %}
