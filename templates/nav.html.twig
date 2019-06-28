@@ -1,6 +1,26 @@
-<!-- As a heading -->
-<div class="container p-0">
-	<nav class="navbar navbar-light bg-light">
-		<a href="{{ path('home') }}"><span class="navbar-brand mb-0 h1">Notre ville en mouvement</span></a>
+<div class="container">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<a class="navbar-brand" href="#">Navbar</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="{{ path('home') }}">Home <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{{ path('topics_index') }}">Topics</a>
+				</li>
+			</ul>
+			<div class="my-2 my-lg-0">
+				{% if app.user %}
+    				<a href="{{ path('app_logout') }}"> <boutun class="ml-2 btn btn-outline-primary my-2 my-sm-0">Se déconnecter</bouton></a>
+				{% else %}
+    				<a href="{{ path('app_login') }}"> <boutun class="ml-2 btn btn-outline-primary my-2 my-sm-0">Se connecter</bouton></a>
+				{% endif %}
+			</div>
+		</div>
 	</nav>
 </div>
