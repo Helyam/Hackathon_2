@@ -178,6 +178,15 @@ class TopicsController extends AbstractController
             if ($userVote){
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->remove($userVote);
+                if ($like == 'like') {
+                $topic->setVotePositif($topic->getVotePositif() + 1);
+                $topic->setVoteNegatif($topic->getVoteNegatif() - 1);
+                    }
+                else
+                {
+                $topic->setVotePositif($topic->getVotePositif() - 1);
+                $topic->setVoteNegatif($topic->getVoteNegatif() + 1); 
+                }
             }
             $newVote = new Vote();
             $newVote ->setUser($this->getUser())
