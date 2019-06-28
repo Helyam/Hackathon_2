@@ -6,6 +6,8 @@
 <div class="container">
     {% if topic.status == 'A Valider' %}
         <div class="border bg-warning rounded p-2 my-2">
+    {% elseif topic.status == 'Réalisé' %}
+        <div class="border bg-info rounded p-2 my-2">
     {% else %}
         <div class="border bg-secondary rounded p-2 my-2">
     {% endif %}

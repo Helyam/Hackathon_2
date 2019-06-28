@@ -13,12 +13,20 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\User;
 use App\Entity\Vote;
+use App\Services\StatusUpdate;
 
 /**
  * @Route("/topics")
  */
 class TopicsController extends AbstractController
 {
+
+    private $statusUpdate;
+
+    public function __construct(StatusUpdate $statusUpdate)
+    {
+        $this->statusUpdate = $statusUpdate;
+    }
     /**
      * @Route("/", name="topics_index", methods={"GET"})
      */
@@ -144,6 +152,7 @@ class TopicsController extends AbstractController
             $vote ->setUser($this->getUser())
                   ->setTopic($topic)
                   ->setIsPositif(true);
+                  $topic = $this->statusUpdate->checkStatus($topic);
             $manager->persist($vote);
             $manager->flush();
 

@@ -16,9 +16,11 @@
 			</ul>
 			<div class="my-2 my-lg-0">
 				{% if app.user %}
-    				<a href="{{ path('app_logout') }}"> <boutun class="ml-2 btn btn-outline-primary my-2 my-sm-0">Se déconnecter</bouton></a>
+    				<a href="{{ path('app_logout') }}">
+					<button class="mb-2 mr-md-4" style="background-color: #FFFFFF; border-radius: 20px; border-width: thick;">Se déconnecter</button></a>
 				{% else %}
-    				<a href="{{ path('app_login') }}"> <boutun class="ml-2 btn btn-outline-primary my-2 my-sm-0">Se connecter</bouton></a>
+    				<a href="{{ path('app_login') }}">
+					<button class="mb-2 mr-md-4" style="background-color: #FFFFFF; border-radius: 20px; border-width: thick;">Se connecter</button></a>
 				{% endif %}
 			</div>
 		</div>
