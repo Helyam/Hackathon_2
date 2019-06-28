@@ -57,14 +57,19 @@
             {# <form method="POST" action="{{ path("topics_plus",{"id" :topic.id}) }}"> #}
             <button onclick="vote('like')" class="mb-2 mr-md-4 offset-5" style="background-color: #FFFFFF; border-radius: 20px; border-width: thick;">
                 <h5 class="text-light mt-1 mx-1">
-                    <i class="fas fa-arrow-circle-up" style="color:green;"></i>        
-                </h5>
-            </button>
+                    <i class="fas fa-arrow-circle-up" id="like"
+                    style="color:{% if myVote == 'like' %} green{% else %} grey {%endif%};">    
+                    </i>
+                </h5></button>
             {# </form> #}
 
 {#             <form method="POST" action="{{ path("topics_moins",{"id" :topic.id}) }}"> #}
                 <button onclick="vote('dislike')" class="mb-2 mr-md-4 offset-1" style="background-color: #FFFFFF; border-radius: 20px; border-width: thick;">
-                <h5 class="text-light mt-1 mx-1"><i class="fas fa-arrow-circle-down" style="color:red;"></i></h5></button>
+                <h5 class="text-light mt-1 mx-1">
+                    <i class="fas fa-arrow-circle-down" id="dislike"
+                    style="color:{% if myVote == 'dislike' %} red{% else %} grey {%endif%};"> 
+                    </i>
+                </h5></button>
             {# </form> #}
 
         </div>
@@ -107,7 +112,24 @@
         {% endfor %}
 </div>
 </div>
-
+<script>
+    function vote(like) {
+      fetch('/topics/{{topic.id}}/like/' + like, { method: 'POST' })
+    .then(response => response.json())
+    .then(json => {
+            let likeElt = document.getElementById('like');
+            let dislikeElt = document.getElementById('dislike');
+        if (json.like == 'like') {
+            likeElt.style.color = 'green';
+            dislikeElt.style.color = 'grey';
+        }
+        if (json.like == 'dislike') {
+            dislikeElt.style.color = 'red';
+            likeElt.style.color = 'grey';
+        }
+    });
+    }
+</script>
 <script>
 
 /**
