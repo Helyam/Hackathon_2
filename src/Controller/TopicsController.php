@@ -68,8 +68,15 @@ class TopicsController extends AbstractController
      * @Route("/{id}", name="topics_show", methods={"GET"})
      */
     public function show(Topics $topic, TopicsRepository $topicsRepository): Response
-    {
+    {     
+        $vote = $voteRepo->findBy(['topic' => $topic->getId(),
+                                    'user' => $this->getUser()->getId()
+                                        ]);
+
+        !$vote ? $myVote = $vote :$myVote = 'lol';
+
         return $this->render('topics/show.html.twig', [
+            'myVote' => $myVote,
             'topic' => $topic,
             'topics' => $topicsRepository->findAll(),
         ]);
