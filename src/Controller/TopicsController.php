@@ -89,7 +89,9 @@ class TopicsController extends AbstractController
          if ($_SERVER['REQUEST_METHOD'] === 'POST' && $user->getStatus() == "representant") {
             $topic->setBudget($_POST['budget']);
             $topic->setReponse($_POST['response']);
-            $topic->setStatus('A Valider');
+            $topic->setStatus('A Valider')
+                  ->setVotePositif(0)
+                  ->setVoteNegatif(0);
             $manager->flush();
 
              return $this->redirectToRoute('topics_index', [
