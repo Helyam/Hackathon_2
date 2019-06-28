@@ -5,6 +5,7 @@
 	</div>
 	<div>
 		{% for topic in topics|slice(0, 3) %}
+			{% if topic.status == "Ouvert" or topic.status == "Revu" %}
 		<a href="{{ path('topics_show', {'id': topic.id}) }}">
 			<div class="card text-center m-2">
 			<div class="card-body p-1">
@@ -16,6 +17,7 @@
 				  ouvert le {{ topic.dateDeCreation ? topic.dateDeCreation|date('d/m/Y h:i') : '' }}
 			</div>
 		</div></a>
+			{% endif %}
 		{% endfor %}
 	</div>
 </div>
