@@ -3,16 +3,18 @@
 	<div>
 		{% for topic in topics %}
 			{% if topic.status == "A Valider" %}
+		<a href="{{ path('topics_show', {'id': topic.id}) }}">
 		<div class="card text-center m-2">
 			<div class="card-body p-1">
-				<h5 class="card-title mb-1"> {{ topic.titre }}		
+				<h5 class="card-title mb-1"> {{ topic.titre }}
 				</h5>
 			</div>
 			{% set pourcentPos = 100 * topic.votePositif / (topic.votePositif + topic.voteNegatif) %}
 			<div class="card-footer text-muted p-1">
-				favorable: {{ pourcentPos|round }}% , budget: {{ topic.budget }}, cloture le 19/07/19
+				favorable: {{ pourcentPos|round }}% , budget: {{ topic.budget }}, cloture le {{ topic.dateDeCreation ? topic.dateDeCreation|date('d/m/Y h:i') : '' }}
 			</div>
 		</div>
+		</a>
 			{% endif %}
 		{% endfor %}
 	</div>
