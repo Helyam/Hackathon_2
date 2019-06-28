@@ -67,9 +67,20 @@ class TopicsController extends AbstractController
     /**
      * @Route("/{id}", name="topics_show", methods={"GET"})
      */
-    public function show(Topics $topic, TopicsRepository $topicsRepository): Response
-    {
+    public function show(Topics $topic, TopicsRepository $topicsRepository, VoteRepository $voteRepo): Response
+    {    
+        $myVote = 'undefined';
+        if ($this->getUser()) {
+            $vote = $voteRepo->findOneBy(['topic' => $topic->getId(),
+                                        'user' => $this->getUser()->getId()
+                                            ]);
+            if ($vote) {
+                $vote->getIsPositif()? $myVote ='like': $myVote = 'dislike';
+            }
+         } 
+
         return $this->render('topics/show.html.twig', [
+            'myVote' => $myVote,
             'topic' => $topic,
             'topics' => $topicsRepository->findAll(),
         ]);
@@ -154,26 +165,32 @@ class TopicsController extends AbstractController
         return $this->render('topics/show.html.twig');
     }
 
-    //  /**
-    //  * @Route("/{id}/like/{like})", name="topics_like", methods={"GET","POST"})
-    //  */
-    // public function topicLike(Request $request, Topic $topic, string $like)
-    // {
-    //     $entityManager = $this->getDoctrine()->getManager();
-    //     $userVote = $voteRepo->findOneBy(['topic' => $topic->getId(),
-    //                                 'user' => $this->getUser()->getId()
-    //                                     ]);
-    //     if ($userVote){
-    //         $entityManager = $this->getDoctrine()->getManager();
-    //         $entityManager->remove($userVote);
-    //     }
-    //         $newVote = new Vote();
-    //         $newVote ->setUser($this->getUser())
-    //               ->setTopic($topic);
-    //         $like == 'like'?$newVote->setIsPositif(true):$newVote->setIsPositif(false);
-    //         $entityManager->persist($newVote);
-    //         $entityManager->flush();
-    // }
+     /**
+     * @Route("/{id}/like/{like}", name="topics_like", methods={"POST"})
+     */
+    public function topicLike(Request $request, Topics $topic, string $like,VoteRepository $voteRepo)
+    {
+        if ($like != 'undefined' ) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $userVote = $voteRepo->findOneBy(['topic' => $topic->getId(),
+                                        'user' => $this->getUser()->getId()
+                                            ]);
+            if ($userVote){
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->remove($userVote);
+            }
+            $newVote = new Vote();
+            $newVote ->setUser($this->getUser())
+                  ->setTopic($topic);
+            $like == 'like'?$newVote->setIsPositif(true):$newVote->setIsPositif(false);
+            $entityManager->persist($newVote);
+            $entityManager->flush();
+        }
+
+        return $this->json([
+            'like' => $like
+        ]); 
+    }
 
     
 }
