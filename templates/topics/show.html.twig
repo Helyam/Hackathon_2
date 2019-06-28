@@ -26,17 +26,22 @@
                     <i class="fas fa-arrow-circle-up" style="color:green;"></i>{{ topic.votePositif }},
                     <i class="fas fa-arrow-circle-down" style="color:red;"></i>{{ topic.voteNegatif }},
                       ouvert le {{ topic.dateDeCreation ? topic.dateDeCreation|date('d/m/Y') : '' }}
-                    {% set pourcentPos = 100 * topic.votePositif / (topic.votePositif + topic.voteNegatif) %}
-                    {% set pourcentNeg = 100 * topic.voteNegatif / (topic.votePositif + topic.voteNegatif) %}
 
+                        {% if (topic.votePositif + topic.voteNegatif != 0)  %}
+                            {% set pourcentPos = 100 * topic.votePositif / (topic.votePositif + topic.voteNegatif) %}
+                            {% set pourcentNeg = 100 * topic.voteNegatif / (topic.votePositif + topic.voteNegatif) %}
+                        {% else %}
+                            {% set pourcentPos = 0 %}
+                            {% set pourcentNeg = 100 %}
+                        {% endif %}
 
                     <div class="progress">
-
                         <div class="progress-bar bg-success" role="progressbar" style="width: {{ pourcentPos }}%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
                         <div class="progress-bar bg-danger" role="progressbar" style="width: {{ pourcentNeg }}%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
 
                 </div>
+                {% if app.user.status is defined %}
                 {% if app.user.status == "representant" %}
                     <form action="{{ path('topics_edit', {'id' :topic.id}) }}" method="POST">
                         <p>Budget :</p>
@@ -46,18 +51,32 @@
                         <input type="submit" name="go">
                     </form>   
                 {% endif %}
+                {% endif %}
             </div>
-            <form method="POST" action="{{ path("topics_plus",{"id" :topic.id}) }}">
-                <button type="submit" class="mb-2 mr-md-4 offset-5" style="background-color: #FFFFFF; border-radius: 20px; border-width: thick;">
-                <h5 class="text-light mt-1 mx-1"><i class="fas fa-arrow-circle-up" style="color:green;"></i></h5></button>
-            </form>
-            <form method="POST" action="{{ path("topics_moins",{"id" :topic.id}) }}">
-                <button class="mb-2 mr-md-4 offset-1" style="background-color: #FFFFFF; border-radius: 20px; border-width: thick;">
-                <h5 class="text-light mt-1 mx-1"><i class="fas fa-arrow-circle-down" style="color:red;"></i></h5></button>
-            </form>
+
+            {# <form method="POST" action="{{ path("topics_plus",{"id" :topic.id}) }}"> #}
+            <button onclick="vote('like')" class="mb-2 mr-md-4 offset-5" style="background-color: #FFFFFF; border-radius: 20px; border-width: thick;">
+                <h5 class="text-light mt-1 mx-1">
+                    <i class="fas fa-arrow-circle-up" id="like"
+                    style="color:{% if myVote == 'like' %} green{% else %} grey {%endif%};">    
+                    </i>
+                </h5></button>
+            {# </form> #}
+
+{#             <form method="POST" action="{{ path("topics_moins",{"id" :topic.id}) }}"> #}
+                <button onclick="vote('dislike')" class="mb-2 mr-md-4 offset-1" style="background-color: #FFFFFF; border-radius: 20px; border-width: thick;">
+                <h5 class="text-light mt-1 mx-1">
+                    <i class="fas fa-arrow-circle-down" id="dislike"
+                    style="color:{% if myVote == 'dislike' %} red{% else %} grey {%endif%};"> 
+                    </i>
+                </h5></button>
+            {# </form> #}
+
         </div>
     </div>
+<div id="disqus_thread"></div>
 </div>
+
 <hr class="container">
 <div class="container    ">
     <a style="color: white" href="{{ path('topics_new') }}">Create new</a>
@@ -72,8 +91,14 @@
     <p class="card-text p-2"><b>{{ topic.Content |length > 50 ? topic.Content|slice(0,50) ~ '...' : topic.Content }}</b></p>
     <p class ="p-2"><i>{{ topic.dateDeCreation ? topic.dateDeCreation|date('Y-m-d') : '' }}</i></p>
 
-    {% set pourcentPos = 100 * topic.votePositif / (topic.votePositif + topic.voteNegatif) %}
-    {% set pourcentNeg = 100 * topic.voteNegatif / (topic.votePositif + topic.voteNegatif) %}
+        {% if (topic.votePositif + topic.voteNegatif != 0)  %}
+            {% set pourcentPos = 100 * topic.votePositif / (topic.votePositif + topic.voteNegatif) %}
+            {% set pourcentNeg = 100 * topic.voteNegatif / (topic.votePositif + topic.voteNegatif) %}
+        {% else %}
+            {% set pourcentPos = 0 %}
+            {% set pourcentNeg = 100 %}
+        {% endif %}
+
     <div class="progress p-1">
         <div class="progress-bar bg-success" role="progressbar" style="width: {{ pourcentPos }}%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
         <div class="progress-bar bg-danger" role="progressbar" style="width: {{ pourcentNeg }}%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
@@ -87,5 +112,42 @@
         {% endfor %}
 </div>
 </div>
+<script>
+    function vote(like) {
+      fetch('/topics/{{topic.id}}/like/' + like, { method: 'POST' })
+    .then(response => response.json())
+    .then(json => {
+            let likeElt = document.getElementById('like');
+            let dislikeElt = document.getElementById('dislike');
+        if (json.like == 'like') {
+            likeElt.style.color = 'green';
+            dislikeElt.style.color = 'grey';
+        }
+        if (json.like == 'dislike') {
+            dislikeElt.style.color = 'red';
+            likeElt.style.color = 'grey';
+        }
+    });
+    }
+</script>
+<script>
 
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+var disqus_config = function () {
+this.page.url = 'http://127.0.0.1:8000/topics/{{ topic.id }}';  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = {{ topic.id }}; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://bettertownbuilder.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 {% endblock %}
