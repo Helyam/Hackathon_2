@@ -4,7 +4,7 @@
 	<a class="col-md-3" href="{{ path('topics_index') }}"><button  style="background-color: #FFFFFF; border-radius: 20px; border-width: thick;">j'en veux plus</button></a>
 	</div>
 	<div>
-		{% for topic in topics|slice(0, 5) %}
+		{% for topic in topics|slice(0, 3) %}
 		<a href="{{ path('topics_show', {'id': topic.id}) }}">
 			<div class="card text-center m-2">
 			<div class="card-body p-1">

@@ -32,7 +32,7 @@
 			</div>
 			{% set pourcentPos = 100 * topic.votePositif / (topic.votePositif + topic.voteNegatif) %}
 			<div class="card-footer text-muted p-1">
-				favorable: {{ pourcentPos|round }}% , budget: {{ topic.budget }}, cloture le {{ topic.dateDeCreation ? topic.dateDeCreation|date('d/m/Y h:i') : '' }}
+				favorable: {{ pourcentPos|round }}% , budget: {{ topic.budget }}
 			</div>
 		</div>
 		</a>

@@ -23,10 +23,16 @@
                     <h5 class="p-1 mb-1">Status: {{ topic.status }} | Budget: {{ topic.budget }} | Réponse: {{ topic.reponse }}</h5>
                 </div>
                 </div>
-                <div class="card-footer text-muted p-0">
-                    <i class="fas fa-arrow-circle-up" style="color:green;"></i><span class="text-dark">{{ topic.votePositif }},
-                    <i class="fas fa-arrow-circle-down" style="color:red;"></i>{{ topic.voteNegatif }},
-                      ouvert le {{ topic.dateDeCreation ? topic.dateDeCreation|date('d/m/Y') : '' }}</span>
+                <div class="card-footer text-muted p-1">
+                    <i class="fas fa-arrow-circle-up" style="color:green;"></i>
+                    <span id='positif'>
+                        {{ topic.votePositif }}
+                    </span>,
+                    <i class="fas fa-arrow-circle-down" style="color:red;"></i>                    
+                    <span id='negatif'>
+                        {{ topic.voteNegatif }}
+                    </span>,
+                      ouvert le {{ topic.dateDeCreation ? topic.dateDeCreation|date('d/m/Y') : '' }}
 
                         {% if (topic.votePositif + topic.voteNegatif != 0)  %}
                             {% set pourcentPos = 100 * topic.votePositif / (topic.votePositif + topic.voteNegatif) %}
@@ -120,13 +126,19 @@
     .then(json => {
             let likeElt = document.getElementById('like');
             let dislikeElt = document.getElementById('dislike');
+            let negElt = document.getElementById('negatif');
+            let positifElt = document.getElementById('positif');
         if (json.like == 'like') {
             likeElt.style.color = 'green';
             dislikeElt.style.color = 'grey';
+            negElt.innerHTML = parseInt(negElt.innerHTML) - 1;
+            positifElt.innerHTML = parseInt(positifElt.innerHTML) + 1;
         }
         if (json.like == 'dislike') {
             dislikeElt.style.color = 'red';
             likeElt.style.color = 'grey';
+            negElt.innerHTML = parseInt(negElt.innerHTML) + 1;
+            positifElt.innerHTML = parseInt(positifElt.innerHTML) - 1;
         }
     });
     }
