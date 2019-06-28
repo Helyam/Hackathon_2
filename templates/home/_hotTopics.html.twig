@@ -1,7 +1,7 @@
 <div class="border bg-secondary rounded p-2 my-2">
-	<h2>Les topics qu'il faut consulter <a href="{{ path('topics_index') }}" class="btn btn-primary">j'en veux plus</a> </h2>
+	<h2 class="text-light">Les topics qu'il faut consulter <a href="{{ path('topics_index') }}" class="btn btn-primary">j'en veux plus</a> </h2>
 	<div>
-		{% for topic in topics %}
+		{% for topic in topics|slice(0, 5) %}
 		<a href="{{ path('topics_show', {'id': topic.id}) }}">
 			<div class="card text-center m-2">
 			<div class="card-body p-1">
