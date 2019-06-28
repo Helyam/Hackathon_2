@@ -4,7 +4,7 @@
 		<h4> Je peux créer un nouveau topic:<a href="{{ path('topics_new') }}" class="btn btn-success">GO</a></h4>
 		<div class="bg-light">
 			<h3 class="text-dark">Mes créations</h3>
-			<ul>
+			<ul class="text-dark">
 				{% for topic in topics %}
 					{% if app.user.id == topic.auteur.id %}
 						<li>
@@ -18,7 +18,7 @@
 		</div>
 		<div class="bg-light">
 			<h3 class="text-dark">Mes derniers avis</h3>
-			<ul>
+			<ul class="text-dark">
 				{% for vote in votes %}
 					{% if app.user.id == vote.user.id %}
 						<li>

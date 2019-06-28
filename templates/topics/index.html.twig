@@ -11,11 +11,21 @@
         {% for topic in topics %}
  <div class="card mb-5" style="width: 20rem;">
   <img class="card-img-top" src="{{ topic.picture }}" alt="Card image cap">
-  <div class="card-body p-0">
-    <h5 class="card-title bg-dark text-light p-3" style="height: 7rem;">{{ topic.titre }}</h5>
+
+      {% if topic.status == 'A Valider' %}
+    <div class="card-body p-0 bg-warning">
+        <h5 class="card-title bg-light text-dark p-3" style="height: 7rem;">{{ topic.titre }}</h5>
+    {% elseif topic.status == 'Réalisé' %}
+        <div class="card-body p-0 bg-info">
+            <h5 class="card-title bg-dark text-light p-3" style="height: 7rem;">{{ topic.titre }}</h5>
+    {% else %}
+      <div class="card-body p-0">
+          <h5 class="card-title bg-dark text-light p-3" style="height: 7rem;">{{ topic.titre }}</h5>
+    {% endif %}
+  
     <p class="card-text p-2"><b>{{ topic.Content |length > 50 ? topic.Content|slice(0,50) ~ '...' : topic.Content }}</b></p>
     <p class ="p-2"><i>{{ topic.dateDeCreation ? topic.dateDeCreation|date('Y-m-d') : '' }}</i></p>
-
+    <p>{{ topic.status }}</p>
 
     {% if (topic.votePositif + topic.voteNegatif != 0)  %}
         {% set pourcentPos = 100 * topic.votePositif / (topic.votePositif + topic.voteNegatif) %}
@@ -25,7 +35,17 @@
         {% set pourcentNeg = 100 %}
     {% endif %}
 
-    <div class="progress p-1">
+
+    {% if topic.status == 'A Valider' %}
+    <div class="progress p-1 bg-warning">
+    {% elseif topic.status == 'Réalisé' %}
+    <div class="progress p-1 bg-info">
+    {% elseif topic.status == 'Refusé' %}
+    <div class="progress p-1" style="background-color: brown;">
+    {% else %}
+    <div class="progress p-1 bg-light">
+    {% endif %}
+
         <div class="progress-bar bg-success" role="progressbar" style="width: {{ pourcentPos }}%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
         <div class="progress-bar bg-danger" role="progressbar" style="width: {{ pourcentNeg }}%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
     </div>
