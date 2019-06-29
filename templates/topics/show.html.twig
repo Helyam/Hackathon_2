@@ -129,13 +129,13 @@
             let dislikeElt = document.getElementById('dislike');
             let negElt = document.getElementById('negatif');
             let positifElt = document.getElementById('positif');
-        if (json.like == 'like') {
+        if (json.like == 'like' && likeElt.style.color == 'grey') {
             likeElt.style.color = 'green';
             dislikeElt.style.color = 'grey';
             negElt.innerHTML = parseInt(negElt.innerHTML) - 1;
             positifElt.innerHTML = parseInt(positifElt.innerHTML) + 1;
         }
-        if (json.like == 'dislike') {
+        if (json.like == 'dislike' && dislikeElt.style.color == 'grey') {
             dislikeElt.style.color = 'red';
             likeElt.style.color = 'grey';
             negElt.innerHTML = parseInt(negElt.innerHTML) + 1;
